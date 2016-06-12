@@ -96,16 +96,16 @@ throw DataCannotBeEmpty::newFromVar([], '\$data');
 
 ### Catching The Exception
 
-`BadRequirement` extends or implements a rich set of classes and interfaces. You can use any of these to catch thrown exceptions.
+`DataCannotBeEmpty` extends or implements a rich set of classes and interfaces. You can use any of these to catch thrown exceptions.
 
 ```php
-// example 1: we catch only BadRequirement exceptions
+// example 1: we catch only DataCannotBeEmpty exceptions
 use GanbaroDigital\TypeChecking\V1\Exceptions\DataCannotBeEmpty;
 
 try {
     throw DataCannotBeEmpty::newFromVar([], '\$data');
 }
-catch(BadRequirement $e) {
+catch(DataCannotBeEmpty $e) {
     // ...
 }
 ```
