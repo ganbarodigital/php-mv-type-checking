@@ -192,6 +192,7 @@ Here is the contract for this class:
      [x] is RuntimeException
      [x] is HttpException
      [x] maps onto HTTP 500
+     [x] Can create from input parameter
      [x] Can create from variable
 
 Class contracts are built from this class's unit tests.
