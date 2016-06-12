@@ -51,11 +51,29 @@ class DataMustBeEmpty
      * @return DataMustBeEmpty
      *         an exception ready for you to throw
      */
+    public static function newFromInputParameter(
+        $data,
+        $fieldOrVarName = '$data',
+        array $callerFilter = []
+    );
+
+    /**
+     * create a new exception, from a PHP variable
+     *
+     * @param  mixed $data
+     *         the variable that must be empty
+     * @param  string $fieldOrVarName
+     *         the name of the variable
+     * @param  array $callerFilter
+     *         a list of classes to filter from the backtrace
+     * @return DataMustBeEmpty
+     *         an exception ready for you to throw
+     */
     public static function newFromVar(
         $data,
-        $fieldOrVarName = '\$data',
+        $fieldOrVarName = '$data',
         array $callerFilter = []
-    )
+    );
 
     /**
      * what was the data that we used to create the printable message?

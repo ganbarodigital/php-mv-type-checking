@@ -44,6 +44,7 @@
 namespace GanbaroDigital\TypeChecking\V1\Exceptions;
 
 use GanbaroDigital\ExceptionHelpers\V1\BaseExceptions\ParameterisedException;
+use GanbaroDigital\ExceptionHelpers\V1\Callers\Filters\FilterCodeCaller;
 use GanbaroDigital\ExceptionHelpers\V1\Callers\Filters\FilterBacktraceForTwoCodeCallers;
 use GanbaroDigital\HttpStatus\Interfaces\HttpRuntimeErrorException;
 use GanbaroDigital\HttpStatus\StatusProviders\RuntimeError\UnexpectedErrorStatusProvider;
@@ -67,7 +68,7 @@ class DataMustBeEmpty
      * @return DataMustBeEmpty
      *         an exception ready for you to throw
      */
-    public static function newFromVar($data, $fieldOrVarName = '\$data', array $callerFilter = [])
+    public static function newFromInputParameter($data, $fieldOrVarName = '$data', array $callerFilter = [])
     {
         // who called us?
         $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
@@ -77,12 +78,43 @@ class DataMustBeEmpty
         $exceptionData = [
             "thrownBy" => $callers[0],
             "thrownByName" => $callers[0]->getCaller(),
-            "caller" => $callers[1],
-            "callerName" => $callers[1]->getCaller(),
+            "calledBy" => $callers[1],
+            "calledByName" => $callers[1]->getCaller(),
             "fieldOrVarName" => $fieldOrVarName,
             "data" => $data,
         ];
-        $msg = "Field or variable '%fieldOrVarName\$s' passed into %thrownByName\$s by %callerName\$s must be empty";
+        $msg = "%calledByName\$s: %thrownByName\$s says '%fieldOrVarName\$s' must be empty";
+
+        // all done
+        return new static($msg, $exceptionData);
+    }
+
+    /**
+     * create a new exception, from a PHP variable
+     *
+     * @param  mixed $data
+     *         the variable that must be empty
+     * @param  string $fieldOrVarName
+     *         the name of the variable
+     * @param  array $callerFilter
+     *         a list of classes to filter from the backtrace
+     * @return DataMustBeEmpty
+     *         an exception ready for you to throw
+     */
+    public static function newFromVar($data, $fieldOrVarName = '$data', array $callerFilter = [])
+    {
+        // who called us?
+        $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
+        $caller = FilterCodeCaller::from($trace, $callerFilter);
+
+        // put it all together
+        $exceptionData = [
+            "thrownBy" => $caller,
+            "thrownByName" => $caller->getCaller(),
+            "fieldOrVarName" => $fieldOrVarName,
+            "data" => $data,
+        ];
+        $msg = "%thrownByName\$s: '%fieldOrVarName\$s' must be empty";
 
         // all done
         return new static($msg, $exceptionData);
