@@ -51,6 +51,24 @@ class DataCannotBeEmpty
      * @return DataCannotBeEmpty
      *         an exception ready for you to throw
      */
+    public static function newFromInputParameter(
+        $data,
+        $fieldOrVarName = '\$data',
+        array $callerFilter = []
+    );
+
+    /**
+     * create a new exception, from a PHP variable
+     *
+     * @param  mixed $data
+     *         the variable that cannot be empty
+     * @param  string $fieldOrVarName
+     *         the name of the variable
+     * @param  array $callerFilter
+     *         a list of classes to filter from the backtrace
+     * @return DataCannotBeEmpty
+     *         an exception ready for you to throw
+     */
     public static function newFromVar(
         $data,
         $fieldOrVarName = '\$data',

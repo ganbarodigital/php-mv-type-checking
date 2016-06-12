@@ -163,6 +163,39 @@ class DataCannotBeEmptyTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers ::newFromInputParameter
+     */
+    public function testCanCreateFromInputParameter()
+    {
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $expectedMessage = 'ReflectionMethod->invokeArgs(): GanbaroDigitalTest\Reflection\V1\Exceptions\DataCannotBeEmptyTest->testCanCreateFromInputParameter()@186 says \'$data\' cannot be empty';
+        $expectedData = [
+            'thrownBy' => new CodeCaller(self::class, __FUNCTION__, '->', __FILE__, __LINE__ + 11),
+            'thrownByName' => 'GanbaroDigitalTest\Reflection\V1\Exceptions\DataCannotBeEmptyTest->testCanCreateFromInputParameter()@186',
+            'calledBy' => new CodeCaller('ReflectionMethod', 'invokeArgs', '->', null, null),
+            'calledByName' => 'ReflectionMethod->invokeArgs()',
+            'fieldOrVarName' => '$data',
+        ];
+        $data = null;
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit = DataCannotBeEmpty::newFromInputParameter($data, '$data');
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $actualMessage = $unit->getMessage();
+        $actualData = $unit->getMessageData();
+
+        $this->assertEquals($expectedMessage, $actualMessage);
+        $this->assertEquals($expectedData, $actualData);
+    }
+
+    /**
      * @covers ::newFromVar
      */
     public function testCanCreateFromVariable()
@@ -170,20 +203,18 @@ class DataCannotBeEmptyTest extends PHPUnit_Framework_TestCase
         // ----------------------------------------------------------------
         // setup your test
 
-        $expectedMessage = 'Field or variable \'\$data\' passed into GanbaroDigitalTest\Reflection\V1\Exceptions\DataCannotBeEmptyTest->testCanCreateFromVariable()@186 by ReflectionMethod->invokeArgs() cannot be empty; not allowed!';
+        $expectedMessage = 'GanbaroDigitalTest\Reflection\V1\Exceptions\DataCannotBeEmptyTest->testCanCreateFromVariable()@217: \'$data\' cannot be empty';
         $expectedData = [
-            'thrownBy' => new CodeCaller(self::class, __FUNCTION__, '->', __FILE__, __LINE__ + 11),
-            'thrownByName' => 'GanbaroDigitalTest\Reflection\V1\Exceptions\DataCannotBeEmptyTest->testCanCreateFromVariable()@186',
-            'caller' => new CodeCaller('ReflectionMethod', 'invokeArgs', '->', null, null),
-            'callerName' => 'ReflectionMethod->invokeArgs()',
-            'fieldOrVarName' => '\$data',
+            'thrownBy' => new CodeCaller(self::class, __FUNCTION__, '->', __FILE__, __LINE__ + 9),
+            'thrownByName' => 'GanbaroDigitalTest\Reflection\V1\Exceptions\DataCannotBeEmptyTest->testCanCreateFromVariable()@217',
+            'fieldOrVarName' => '$data',
         ];
         $data = null;
 
         // ----------------------------------------------------------------
         // perform the change
 
-        $unit = DataCannotBeEmpty::newFromVar($data, '\$data');
+        $unit = DataCannotBeEmpty::newFromVar($data, '$data');
 
         // ----------------------------------------------------------------
         // test the results
