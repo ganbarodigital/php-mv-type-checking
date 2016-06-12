@@ -164,6 +164,43 @@ catch(RuntimeException $e) {
 }
 ```
 
+## Class Contract
+
+Here is the contract for this class:
+
+    GanbaroDigital\Reflection\V1\Exceptions\DataCannotBeEmpty
+     [x] Can instantiate
+     [x] is TypeCheckingException
+     [x] is RuntimeException
+     [x] is HttpException
+     [x] maps onto HTTP 500
+     [x] Can create from variable
+
+Class contracts are built from this class's unit tests.
+
+<div class="callout success">
+Future releases of this class will not break this contract.
+</div>
+
+<div class="callout info" markdown="1">
+Future releases of this class may add to this contract. New additions may include:
+
+* clarifying existing behaviour (e.g. stricter contract around input or return types)
+* add new behaviours (e.g. extra class methods)
+</div>
+
+<div class="callout warning" markdown="1">
+When you use this class, you can only rely on the behaviours documented by this contract.
+
+If you:
+
+* find other ways to use this class,
+* or depend on behaviours that are not covered by a unit test,
+* or depend on undocumented internal states of this class,
+
+... your code may not work in the future.
+</div>
+
 ## Notes
 
 None at this time.
