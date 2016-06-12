@@ -14,3 +14,4 @@ Ported type checks from the now deprecated `ganbarodigital/php-reflection` packa
 
 - Added `TypeCheckingException` type hint interface
 - Added `DataCannotBeEmpty` exception
+- Added `DataMustBeEmpty` exception
