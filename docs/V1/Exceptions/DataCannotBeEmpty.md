@@ -53,7 +53,7 @@ class DataCannotBeEmpty
      */
     public static function newFromInputParameter(
         $data,
-        $fieldOrVarName = '\$data',
+        $fieldOrVarName = '$data',
         array $callerFilter = []
     );
 
@@ -71,7 +71,7 @@ class DataCannotBeEmpty
      */
     public static function newFromVar(
         $data,
-        $fieldOrVarName = '\$data',
+        $fieldOrVarName = '$data',
         array $callerFilter = []
     )
 
