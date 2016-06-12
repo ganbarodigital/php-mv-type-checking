@@ -12,4 +12,4 @@ pageflow_next_text: Contributing
 
 Ported type checks from the now deprecated `ganbarodigital/php-reflection` package.
 
-- 
+- Added `TypeCheckingException` type hint interface
