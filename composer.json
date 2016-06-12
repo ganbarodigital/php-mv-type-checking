@@ -1,0 +1,32 @@
+{
+    "name": "ganbarodigital/php-mv-type-checking",
+    "type": "library",
+    "license": "BSD-3-Clause",
+    "authors": [
+        { "name": "Stuart Herbert", "email": "stuart@stuartherbert.com" }
+    ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/stuartherbert/Couscous"
+        }
+    ],
+    "require": {
+        "php": ">= 5.5",
+        "ganbarodigital/php-mv-exception-helpers": "^1.0",
+        "ganbarodigital/php-mv-defensive": "^1.0",
+        "ganbarodigital/php-the-missing-bits": "^1.6",
+        "ganbarodigital/php-mv-polymorphism": "^1.2016060501",
+        "ganbarodigital/php-mv-di-containers": "^1.2016050901"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.6",
+        "ganbarodigital/php-unit-test-helpers": "^2.1",
+        "couscous/couscous": "dev-develop"
+    },
+    "autoload": {
+        "psr-4": {
+            "GanbaroDigital\\TypeChecking\\": "src"
+        }
+    }
+}

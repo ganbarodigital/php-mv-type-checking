@@ -1,0 +1,6 @@
+composer.lock
+.couscous
+review/
+vendor/
+.tags*
+tmp
