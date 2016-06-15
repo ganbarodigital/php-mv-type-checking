@@ -63,7 +63,7 @@ class DataCannotBeEmpty
     /**
      * create a new exception, from a PHP variable
      *
-     * @param  mixed $data
+     * @param  mixed $fieldOrVar
      *         the variable that cannot be empty
      * @param  string $fieldOrVarName
      *         the name of the variable
@@ -72,7 +72,7 @@ class DataCannotBeEmpty
      * @return DataCannotBeEmpty
      *         an exception ready for you to throw
      */
-    public static function newFromInputParameter($data, $fieldOrVarName = '$data', array $callerFilter = [])
+    public static function newFromInputParameter($fieldOrVar, $fieldOrVarName = '$fieldOrVar', array $callerFilter = [])
     {
         // who called us?
         $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
@@ -90,7 +90,7 @@ class DataCannotBeEmpty
     /**
      * create a new exception, from a PHP variable
      *
-     * @param  mixed $data
+     * @param  mixed $fieldOrVar
      *         the variable that cannot be empty
      * @param  string $fieldOrVarName
      *         the name of the variable
@@ -99,7 +99,7 @@ class DataCannotBeEmpty
      * @return DataCannotBeEmpty
      *         an exception ready for you to throw
      */
-    public static function newFromVar($data, $fieldOrVarName = '$data', array $callerFilter = [])
+    public static function newFromVar($fieldOrVar, $fieldOrVarName = '$fieldOrVarName', array $callerFilter = [])
     {
         // who called us?
         $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
