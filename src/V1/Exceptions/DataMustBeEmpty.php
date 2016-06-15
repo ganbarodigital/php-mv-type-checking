@@ -46,6 +46,8 @@ namespace GanbaroDigital\TypeChecking\V1\Exceptions;
 use GanbaroDigital\ExceptionHelpers\V1\BaseExceptions\ParameterisedException;
 use GanbaroDigital\ExceptionHelpers\V1\Callers\Filters\FilterCodeCaller;
 use GanbaroDigital\ExceptionHelpers\V1\Callers\Filters\FilterBacktraceForTwoCodeCallers;
+use GanbaroDigital\ExceptionHelpers\V1\ParameterBuilders\BuildThrownBy;
+use GanbaroDigital\ExceptionHelpers\V1\ParameterBuilders\BuildThrownAndCalledBy;
 use GanbaroDigital\HttpStatus\Interfaces\HttpRuntimeErrorException;
 use GanbaroDigital\HttpStatus\StatusProviders\RuntimeError\UnexpectedErrorStatusProvider;
 
@@ -56,10 +58,13 @@ class DataMustBeEmpty
     // we map onto HTTP 500
     use UnexpectedErrorStatusProvider;
 
+    // the format string for our exception message
+    const MSG_FORMAT = "'%fieldOrVarName\$s' must be empty";
+
     /**
      * create a new exception, from a PHP variable
      *
-     * @param  mixed $data
+     * @param  mixed $fieldOrVar
      *         the variable that must be empty
      * @param  string $fieldOrVarName
      *         the name of the variable
@@ -68,31 +73,26 @@ class DataMustBeEmpty
      * @return DataMustBeEmpty
      *         an exception ready for you to throw
      */
-    public static function newFromInputParameter($data, $fieldOrVarName = '$data', array $callerFilter = [])
+    public static function newFromInputParameter($fieldOrVar, $fieldOrVarName = '$fieldOrVar', array $callerFilter = [])
     {
         // who called us?
-        $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
-        $callers = FilterBacktraceForTwoCodeCallers::from($trace, $callerFilter);
+        $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
 
-        // put it all together
-        $exceptionData = [
-            "thrownBy" => $callers[0],
-            "thrownByName" => $callers[0]->getCaller(),
-            "calledBy" => $callers[1],
-            "calledByName" => $callers[1]->getCaller(),
-            "fieldOrVarName" => $fieldOrVarName,
-            "data" => $data,
-        ];
-        $msg = "%calledByName\$s: %thrownByName\$s says '%fieldOrVarName\$s' must be empty";
+        // build the basic message and data
+        list($message, $data) = BuildThrownAndCalledBy::from(self::MSG_FORMAT, $backtrace);
+
+        // add in what's unique to us
+        $data['fieldOrVarName'] = $fieldOrVarName;
+        $data['fieldOrVar'] = $fieldOrVar;
 
         // all done
-        return new static($msg, $exceptionData);
+        return new static($message, $data);
     }
 
     /**
      * create a new exception, from a PHP variable
      *
-     * @param  mixed $data
+     * @param  mixed $fieldOrVar
      *         the variable that must be empty
      * @param  string $fieldOrVarName
      *         the name of the variable
@@ -101,22 +101,19 @@ class DataMustBeEmpty
      * @return DataMustBeEmpty
      *         an exception ready for you to throw
      */
-    public static function newFromVar($data, $fieldOrVarName = '$data', array $callerFilter = [])
+    public static function newFromVar($fieldOrVar, $fieldOrVarName = '$fieldOrVar', array $callerFilter = [])
     {
         // who called us?
-        $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
-        $caller = FilterCodeCaller::from($trace, $callerFilter);
+        $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
 
-        // put it all together
-        $exceptionData = [
-            "thrownBy" => $caller,
-            "thrownByName" => $caller->getCaller(),
-            "fieldOrVarName" => $fieldOrVarName,
-            "data" => $data,
-        ];
-        $msg = "%thrownByName\$s: '%fieldOrVarName\$s' must be empty";
+        // build the basic message and data
+        list($message, $data) = BuildThrownBy::from(self::MSG_FORMAT, $backtrace);
+
+        // add in what's unique to us
+        $data['fieldOrVarName'] = $fieldOrVarName;
+        $data['fieldOrVar'] = $fieldOrVar;
 
         // all done
-        return new static($msg, $exceptionData);
+        return new static($message, $data);
     }
 }

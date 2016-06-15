@@ -177,7 +177,7 @@ class DataMustBeEmptyTest extends PHPUnit_Framework_TestCase
             'calledBy' => new CodeCaller('ReflectionMethod', 'invokeArgs', '->', null, null),
             'calledByName' => 'ReflectionMethod->invokeArgs()',
             'fieldOrVarName' => '$data',
-            'data' => null,
+            'fieldOrVar' => null,
         ];
         $data = null;
 
@@ -209,7 +209,7 @@ class DataMustBeEmptyTest extends PHPUnit_Framework_TestCase
             'thrownBy' => new CodeCaller(self::class, __FUNCTION__, '->', __FILE__, __LINE__ + 10),
             'thrownByName' => 'GanbaroDigitalTest\Reflection\V1\Exceptions\DataMustBeEmptyTest->testCanCreateFromVariable()@219',
             'fieldOrVarName' => '$data',
-            'data' => null,
+            'fieldOrVar' => null,
         ];
         $data = null;
 
