@@ -1,8 +1,8 @@
 ---
 currentSection: v1
 currentItem: exceptions
-pageflow_next_url: BadRequirement.html
-pageflow_next_text: BadRequirement class
+pageflow_next_url: DataCannotBeEmpty.html
+pageflow_next_text: DataCannotBeEmpty class
 ---
 
 # Exceptions
