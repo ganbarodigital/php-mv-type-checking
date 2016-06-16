@@ -43,7 +43,7 @@ class InvalidPcreRegex
      * create a new exception, from a PHP variable
      *
      * @param  mixed $fieldOrVar
-     *         the variable that must be empty
+     *         the variable that contains the invalid PCRE regex
      * @param  string $fieldOrVarName
      *         the name of the variable
      * @param  array $callerFilter
@@ -61,7 +61,7 @@ class InvalidPcreRegex
      * create a new exception, from a PHP variable
      *
      * @param  mixed $fieldOrVar
-     *         the variable that must be empty
+     *         the variable that contains the invalid PCRE regex
      * @param  string $fieldOrVarName
      *         the name of the variable
      * @param  array $callerFilter
