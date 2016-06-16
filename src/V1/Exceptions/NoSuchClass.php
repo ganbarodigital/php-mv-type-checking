@@ -70,7 +70,7 @@ class NoSuchClass
      *         the name of the variable
      * @param  array $callerFilter
      *         a list of classes to filter from the backtrace
-     * @return InvalidPcreRegex
+     * @return NoSuchClass
      *         an exception ready for you to throw
      */
     public static function newFromInputParameter($className, $fieldOrVarName = '$className', array $callerFilter = [])
@@ -98,7 +98,7 @@ class NoSuchClass
      *         the name of the variable
      * @param  array $callerFilter
      *         a list of classes to filter from the backtrace
-     * @return InvalidPcreRegex
+     * @return NoSuchClass
      *         an exception ready for you to throw
      */
     public static function newFromVar($className, $fieldOrVarName = '$className', array $callerFilter = [])
