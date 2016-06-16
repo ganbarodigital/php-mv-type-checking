@@ -170,13 +170,13 @@ class InvalidPcreRegexTest extends PHPUnit_Framework_TestCase
         // ----------------------------------------------------------------
         // setup your test
 
-        $expectedMessage = 'ReflectionMethod->invokeArgs(): GanbaroDigitalTest\Reflection\V1\Exceptions\InvalidPcreRegexTest->testCanCreateFromInputParameter()@187 says \'$data\' is not a valid PCRE regex';
+        $expectedMessage = 'ReflectionMethod->invokeArgs(): GanbaroDigitalTest\Reflection\V1\Exceptions\InvalidPcreRegexTest->testCanCreateFromInputParameter()@187 says \'$fieldOrVar\' is not a valid PCRE regex';
         $expectedData = [
             'thrownBy' => new CodeCaller(self::class, __FUNCTION__, '->', __FILE__, __LINE__ + 12),
             'thrownByName' => 'GanbaroDigitalTest\Reflection\V1\Exceptions\InvalidPcreRegexTest->testCanCreateFromInputParameter()@187',
             'calledBy' => new CodeCaller('ReflectionMethod', 'invokeArgs', '->', null, null),
             'calledByName' => 'ReflectionMethod->invokeArgs()',
-            'fieldOrVarName' => '$data',
+            'fieldOrVarName' => '$fieldOrVar',
             'badRegex' => "/hello",
         ];
         $regex = "/hello";
@@ -204,11 +204,11 @@ class InvalidPcreRegexTest extends PHPUnit_Framework_TestCase
         // ----------------------------------------------------------------
         // setup your test
 
-        $expectedMessage = 'GanbaroDigitalTest\Reflection\V1\Exceptions\InvalidPcreRegexTest->testCanCreateFromVariable()@219: \'$data\' is not a valid PCRE regex';
+        $expectedMessage = 'GanbaroDigitalTest\Reflection\V1\Exceptions\InvalidPcreRegexTest->testCanCreateFromVariable()@219: \'$fieldOrVar\' is not a valid PCRE regex';
         $expectedData = [
             'thrownBy' => new CodeCaller(self::class, __FUNCTION__, '->', __FILE__, __LINE__ + 10),
             'thrownByName' => 'GanbaroDigitalTest\Reflection\V1\Exceptions\InvalidPcreRegexTest->testCanCreateFromVariable()@219',
-            'fieldOrVarName' => '$data',
+            'fieldOrVarName' => '$fieldOrVar',
             'badRegex' => "/hello",
         ];
         $regex = "/hello";
