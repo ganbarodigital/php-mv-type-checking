@@ -18,3 +18,4 @@ Ported type checks from the now deprecated `ganbarodigital/php-reflection` packa
 - Added `InvalidPcreRegex` exception
 - Added `NoSuchClass` exception
 - Added `NoSuchClassOrInterface` exception
+- Added `NoSuchInterface` exception
