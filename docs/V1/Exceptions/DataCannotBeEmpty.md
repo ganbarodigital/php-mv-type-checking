@@ -42,7 +42,7 @@ class DataCannotBeEmpty
     /**
      * create a new exception, from a PHP variable
      *
-     * @param  mixed $data
+     * @param  mixed $fieldOrVar
      *         the variable that cannot be empty
      * @param  string $fieldOrVarName
      *         the name of the variable
@@ -52,15 +52,15 @@ class DataCannotBeEmpty
      *         an exception ready for you to throw
      */
     public static function newFromInputParameter(
-        $data,
-        $fieldOrVarName = '$data',
+        $fieldOrVar,
+        $fieldOrVarName = '$fieldOrVar',
         array $callerFilter = []
     );
 
     /**
      * create a new exception, from a PHP variable
      *
-     * @param  mixed $data
+     * @param  mixed $fieldOrVar
      *         the variable that cannot be empty
      * @param  string $fieldOrVarName
      *         the name of the variable
@@ -70,8 +70,8 @@ class DataCannotBeEmpty
      *         an exception ready for you to throw
      */
     public static function newFromVar(
-        $data,
-        $fieldOrVarName = '$data',
+        $fieldOrVar,
+        $fieldOrVarName = '$fieldOrVar',
         array $callerFilter = []
     )
 
@@ -103,14 +103,21 @@ class DataCannotBeEmpty
 
 ### Creating Exceptions To Throw
 
-Call `DataCannotBeEmpty::newFromVar()` to create a new throwable exception:
+Call one of the factory methods to create a new throwable exception:
 
 ```php
 // how to import
 use GanbaroDigital\TypeChecking\V1\Exceptions\DataCannotBeEmpty;
 
-throw DataCannotBeEmpty::newFromVar([], '\$data');
+throw DataCannotBeEmpty::newFromVar([], '$data');
 ```
+
+`DataCannotBeEmpty` provides different factory methods for different situations:
+
+Factory Method | When To Use
+---------------|------------
+`DataCannotBeEmpty::newFromInputParameter()` | when `$fieldOrVar` was passed to your function or method as a parameter
+`DataCannotBeEmpty::newFromVar()` | when `$fieldOrVar` is the return value from calling a function or method, or is a value created by your function or method
 
 ### Catching The Exception
 
@@ -121,7 +128,7 @@ throw DataCannotBeEmpty::newFromVar([], '\$data');
 use GanbaroDigital\TypeChecking\V1\Exceptions\DataCannotBeEmpty;
 
 try {
-    throw DataCannotBeEmpty::newFromVar([], '\$data');
+    throw DataCannotBeEmpty::newFromVar([], '$data');
 }
 catch(DataCannotBeEmpty $e) {
     // ...
@@ -134,7 +141,7 @@ use GanbaroDigital\TypeChecking\V1\Exceptions\DataCannotBeEmpty;
 use GanbaroDigital\TypeChecking\V1\Exceptions\TypeCheckingException;
 
 try {
-    throw DataCannotBeEmpty::newFromVar([], '\$data');
+    throw DataCannotBeEmpty::newFromVar([], '$data');
 }
 catch(TypeCheckingException $e) {
     // ...
@@ -147,7 +154,7 @@ use GanbaroDigital\TypeChecking\V1\Exceptions\DataCannotBeEmpty;
 use GanbaroDigital\HttpStatus\Interfaces\HttpRuntimeErrorException;
 
 try {
-    throw DataCannotBeEmpty::newFromVar([], '\$data');
+    throw DataCannotBeEmpty::newFromVar([], '$data');
 }
 catch(HttpRequestErrorException $e) {
     $httpStatus = $e->getHttpStatus();
@@ -161,7 +168,7 @@ use GanbaroDigital\TypeChecking\V1\Exceptions\DataCannotBeEmpty;
 use GanbaroDigital\HttpStatus\Interfaces\HttpException;
 
 try {
-    throw DataCannotBeEmpty::newFromVar([], '\$data');
+    throw DataCannotBeEmpty::newFromVar([], '$data');
 }
 catch(HttpException $e) {
     $httpStatus = $e->getHttpStatus();
@@ -175,12 +182,44 @@ use GanbaroDigital\TypeChecking\V1\Exceptions\DataCannotBeEmpty;
 use RuntimeException;
 
 try {
-    throw DataCannotBeEmpty::newFromVar([], '\$data');
+    throw DataCannotBeEmpty::newFromVar([], '$data');
 }
 catch(RuntimeException $e) {
     // ...
 }
 ```
+
+### Exception Data
+
+`DataCannotBeEmpty` is a [`ParameterisedException`](http://ganbarodigital.github.io/php-mv-exception-helpers/V1/BaseExceptions/ParameterisedException.html). It contains extra data for you to write to your logs or inspect in your debugger of choice.
+
+```php
+try {
+    throw DataCannotBeEmpty::newFromInputParameter([1,2,3], '$data');
+}
+catch (DataCannotBeEmpty $e) {
+    // extract the extra data
+    // getMessagedData() returns a PHP array
+    $exData = $e->getMessageData();
+}
+```
+
+Here's the full list of the extra data available in this exception.
+
+Parameter | Type | Description
+----------|------|------------
+`thrownBy` | [`CodeCaller`](http://ganbarodigital.github.io/php-mv-exception-helpers/V1/Callers/CodeCaller.html) | details of the function or method that is throwing the exception
+`thrownByName` | string | human-readable summary of `thrownBy`
+`calledBy` | [`CodeCaller`](http://ganbarodigital.github.io/php-mv-exception-helpers/V1/Callers/CodeCaller.html) | details of the function or method that has called the `thrownBy` function or method
+`calledByName` | string | human-readable summary of `calledBy`
+`fieldOrVarName` | string | the `$fieldOrVarName` passed into the factory method
+
+Here's a list of the extra data added by each factory method.
+
+Factory Method | Extra Data Added
+---------------|-----------------
+`DataCannotBeEmpty::newFromInputParameter()` | `thrownBy`, `thrownByName`, `calledBy`, `calledByName`, `fieldOrVarName`
+`DataCannotBeEmpty::newFromVar()` | `thrownBy`, `thrownByName`, `fieldOrVarName`
 
 ## Class Contract
 
