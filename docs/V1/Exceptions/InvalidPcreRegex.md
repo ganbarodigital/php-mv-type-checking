@@ -42,7 +42,7 @@ class InvalidPcreRegex
     /**
      * create a new exception, from a PHP variable
      *
-     * @param  mixed $data
+     * @param  mixed $fieldOrVar
      *         the variable that must be empty
      * @param  string $fieldOrVarName
      *         the name of the variable
@@ -52,15 +52,15 @@ class InvalidPcreRegex
      *         an exception ready for you to throw
      */
     public static function newFromInputParameter(
-        $data,
-        $fieldOrVarName = '$data',
+        $fieldOrVar,
+        $fieldOrVarName = '$fieldOrVar',
         array $callerFilter = []
     );
 
     /**
      * create a new exception, from a PHP variable
      *
-     * @param  mixed $data
+     * @param  mixed $fieldOrVar
      *         the variable that must be empty
      * @param  string $fieldOrVarName
      *         the name of the variable
@@ -70,8 +70,8 @@ class InvalidPcreRegex
      *         an exception ready for you to throw
      */
     public static function newFromVar(
-        $data,
-        $fieldOrVarName = '$data',
+        $fieldOrVar,
+        $fieldOrVarName = '$fieldOrVar',
         array $callerFilter = []
     );
 
@@ -103,7 +103,7 @@ class InvalidPcreRegex
 
 ### Creating Exceptions To Throw
 
-Call `InvalidPcreRegex::newFromVar()` to create a new throwable exception:
+Call one of the factory methods to create a new throwable exception:
 
 ```php
 // how to import
@@ -111,6 +111,13 @@ use GanbaroDigital\TypeChecking\V1\Exceptions\InvalidPcreRegex;
 
 throw InvalidPcreRegex::newFromVar('/hello', '$data');
 ```
+
+`InvalidPcreRegex` provides different factory methods for different situations:
+
+Factory Method | When To Use
+---------------|------------
+`InvalidPcreRegex::newFromInputParameter()` | when `$fieldOrVar` was passed to your function or method as a parameter
+`InvalidPcreRegex::newFromVar()` | when `$fieldOrVar` is the return value from calling a function or method, or is a value created by your function or method
 
 ### Catching The Exception
 
@@ -181,6 +188,39 @@ catch(RuntimeException $e) {
     // ...
 }
 ```
+
+### Exception Data
+
+`InvalidPcreRegex` is a [`ParameterisedException`](http://ganbarodigital.github.io/php-mv-exception-helpers/V1/BaseExceptions/ParameterisedException.html). It contains extra data for you to write to your logs or inspect in your debugger of choice.
+
+```php
+try {
+    throw InvalidPcreRegex::newFromInputParameter('/hello', '$regex');
+}
+catch (InvalidPcreRegex $e) {
+    // extract the extra data
+    // getMessagedData() returns a PHP array
+    $exData = $e->getMessageData();
+}
+```
+
+Here's the full list of the extra data available in this exception.
+
+Parameter | Type | Description
+----------|------|------------
+`thrownBy` | [`CodeCaller`](http://ganbarodigital.github.io/php-mv-exception-helpers/V1/Callers/CodeCaller.html) | details of the function or method that is throwing the exception
+`thrownByName` | string | human-readable summary of `thrownBy`
+`calledBy` | [`CodeCaller`](http://ganbarodigital.github.io/php-mv-exception-helpers/V1/Callers/CodeCaller.html) | details of the function or method that has called the `thrownBy` function or method
+`calledByName` | string | human-readable summary of `calledBy`
+`fieldOrVarName` | string | the `$fieldOrVarName` passed into the factory method
+`badRegex` | mixed | the `$fieldOrVar` passed into the factory method
+
+Here's a list of the extra data added by each factory method.
+
+Factory Method | Extra Data Added
+---------------|-----------------
+`InvalidPcreRegex::newFromInputParameter()` | `thrownBy`, `thrownByName`, `calledBy`, `calledByName`, `fieldOrVarName`, `badRegex`
+`InvalidPcreRegex::newFromVar()` | `thrownBy`, `thrownByName`, `fieldOrVarName`, `badRegex`
 
 ## Class Contract
 
