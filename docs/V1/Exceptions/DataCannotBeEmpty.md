@@ -195,7 +195,7 @@ catch(RuntimeException $e) {
 
 ```php
 try {
-    throw DataCannotBeEmpty::newFromInputParameter([1,2,3], '$data');
+    throw DataCannotBeEmpty::newFromInputParameter([], '$data');
 }
 catch (DataCannotBeEmpty $e) {
     // extract the extra data
