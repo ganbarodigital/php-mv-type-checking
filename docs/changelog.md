@@ -17,3 +17,4 @@ Ported type checks from the now deprecated `ganbarodigital/php-reflection` packa
 - Added `DataMustBeEmpty` exception
 - Added `InvalidPcreRegex` exception
 - Added `NoSuchClass` exception
+- Added `NoSuchClassOrInterface` exception
