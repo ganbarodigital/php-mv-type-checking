@@ -21,3 +21,4 @@ Ported type checks from the now deprecated `ganbarodigital/php-reflection` packa
 - Added `NoSuchInterface` exception
 - Added `NoSuchTrait` exception
 - Added `UnsupportedType` exception
+- Added `UnsupportedValue` exception
