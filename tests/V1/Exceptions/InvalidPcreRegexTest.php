@@ -41,7 +41,7 @@
  * @link      http://ganbarodigital.github.io/php-mv-type-checking
  */
 
-namespace GanbaroDigitalTest\Reflection\V1\Exceptions;
+namespace GanbaroDigitalTest\TypeChecking\V1\Exceptions;
 
 use GanbaroDigital\ExceptionHelpers\V1\Callers\Values\CodeCaller;
 use GanbaroDigital\HttpStatus\Interfaces\HttpException;
@@ -170,10 +170,10 @@ class InvalidPcreRegexTest extends PHPUnit_Framework_TestCase
         // ----------------------------------------------------------------
         // setup your test
 
-        $expectedMessage = 'ReflectionMethod->invokeArgs(): GanbaroDigitalTest\Reflection\V1\Exceptions\InvalidPcreRegexTest->testCanCreateFromInputParameter()@187 says \'$fieldOrVar\' is not a valid PCRE regex';
+        $expectedMessage = 'ReflectionMethod->invokeArgs(): GanbaroDigitalTest\TypeChecking\V1\Exceptions\InvalidPcreRegexTest->testCanCreateFromInputParameter()@187 says \'$fieldOrVar\' is not a valid PCRE regex';
         $expectedData = [
             'thrownBy' => new CodeCaller(self::class, __FUNCTION__, '->', __FILE__, __LINE__ + 12),
-            'thrownByName' => 'GanbaroDigitalTest\Reflection\V1\Exceptions\InvalidPcreRegexTest->testCanCreateFromInputParameter()@187',
+            'thrownByName' => 'GanbaroDigitalTest\TypeChecking\V1\Exceptions\InvalidPcreRegexTest->testCanCreateFromInputParameter()@187',
             'calledBy' => new CodeCaller('ReflectionMethod', 'invokeArgs', '->', null, null),
             'calledByName' => 'ReflectionMethod->invokeArgs()',
             'fieldOrVarName' => '$fieldOrVar',
@@ -204,10 +204,10 @@ class InvalidPcreRegexTest extends PHPUnit_Framework_TestCase
         // ----------------------------------------------------------------
         // setup your test
 
-        $expectedMessage = 'GanbaroDigitalTest\Reflection\V1\Exceptions\InvalidPcreRegexTest->testCanCreateFromVariable()@219: \'$fieldOrVar\' is not a valid PCRE regex';
+        $expectedMessage = 'GanbaroDigitalTest\TypeChecking\V1\Exceptions\InvalidPcreRegexTest->testCanCreateFromVariable()@219: \'$fieldOrVar\' is not a valid PCRE regex';
         $expectedData = [
             'thrownBy' => new CodeCaller(self::class, __FUNCTION__, '->', __FILE__, __LINE__ + 10),
-            'thrownByName' => 'GanbaroDigitalTest\Reflection\V1\Exceptions\InvalidPcreRegexTest->testCanCreateFromVariable()@219',
+            'thrownByName' => 'GanbaroDigitalTest\TypeChecking\V1\Exceptions\InvalidPcreRegexTest->testCanCreateFromVariable()@219',
             'fieldOrVarName' => '$fieldOrVar',
             'badRegex' => "/hello",
         ];

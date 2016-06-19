@@ -41,7 +41,7 @@
  * @link      http://ganbarodigital.github.io/php-mv-type-checking
  */
 
-namespace GanbaroDigitalTest\Reflection\V1\Exceptions;
+namespace GanbaroDigitalTest\TypeChecking\V1\Exceptions;
 
 use GanbaroDigital\ExceptionHelpers\V1\Callers\Values\CodeCaller;
 use GanbaroDigital\HttpStatus\Interfaces\HttpException;
@@ -170,10 +170,10 @@ class NoSuchClassOrInterfaceTest extends PHPUnit_Framework_TestCase
         // ----------------------------------------------------------------
         // setup your test
 
-        $expectedMessage = 'ReflectionMethod->invokeArgs(): GanbaroDigitalTest\Reflection\V1\Exceptions\NoSuchClassOrInterfaceTest->testCanCreateFromInputParameter()@186 says undefined class or interface \'Invoked\'';
+        $expectedMessage = 'ReflectionMethod->invokeArgs(): GanbaroDigitalTest\TypeChecking\V1\Exceptions\NoSuchClassOrInterfaceTest->testCanCreateFromInputParameter()@186 says undefined class or interface \'Invoked\'';
         $expectedData = [
             'thrownBy' => new CodeCaller(self::class, __FUNCTION__, '->', __FILE__, 186),
-            'thrownByName' => 'GanbaroDigitalTest\Reflection\V1\Exceptions\NoSuchClassOrInterfaceTest->testCanCreateFromInputParameter()@186',
+            'thrownByName' => 'GanbaroDigitalTest\TypeChecking\V1\Exceptions\NoSuchClassOrInterfaceTest->testCanCreateFromInputParameter()@186',
             'calledBy' => new CodeCaller('ReflectionMethod', 'invokeArgs', '->', null, null),
             'calledByName' => 'ReflectionMethod->invokeArgs()',
             'className' => 'Invoked',
@@ -203,10 +203,10 @@ class NoSuchClassOrInterfaceTest extends PHPUnit_Framework_TestCase
         // ----------------------------------------------------------------
         // setup your test
 
-        $expectedMessage = 'GanbaroDigitalTest\Reflection\V1\Exceptions\NoSuchClassOrInterfaceTest->testCanCreateFromVariable()@217: undefined class or interface \'Invoked\'';
+        $expectedMessage = 'GanbaroDigitalTest\TypeChecking\V1\Exceptions\NoSuchClassOrInterfaceTest->testCanCreateFromVariable()@217: undefined class or interface \'Invoked\'';
         $expectedData = [
             'thrownBy' => new CodeCaller(self::class, __FUNCTION__, '->', __FILE__, 217),
-            'thrownByName' => 'GanbaroDigitalTest\Reflection\V1\Exceptions\NoSuchClassOrInterfaceTest->testCanCreateFromVariable()@217',
+            'thrownByName' => 'GanbaroDigitalTest\TypeChecking\V1\Exceptions\NoSuchClassOrInterfaceTest->testCanCreateFromVariable()@217',
             'className' => 'Invoked',
             'fieldOrVarName' => '$className',
         ];

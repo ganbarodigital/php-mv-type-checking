@@ -225,7 +225,7 @@ Factory Method | Extra Data Added
 
 Here is the contract for this class:
 
-    GanbaroDigital\Reflection\V1\Exceptions\DataCannotBeEmpty
+    GanbaroDigital\TypeChecking\V1\Exceptions\DataCannotBeEmpty
      [x] Can instantiate
      [x] is TypeCheckingException
      [x] is RuntimeException
