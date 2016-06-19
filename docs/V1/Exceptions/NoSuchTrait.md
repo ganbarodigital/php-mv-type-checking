@@ -1,0 +1,281 @@
+---
+currentSection: v1
+currentItem: exceptions
+pageflow_prev_url: NoSuchInterface.html
+pageflow_prev_text: NoSuchInterface class
+pageflow_next_url: UnsupportedType.html
+pageflow_next_text: UnsupportedType class
+---
+
+# NoSuchTrait
+
+<div class="callout warning" markdown="1">
+Not yet in a tagged release
+</div>
+
+## Description
+
+`NoSuchTrait` is an exception. It is thrown when we have been given a `trait` name that the autoloader cannot find.
+
+<div class="callout info" markdown="1">
+The Type Checking Library throws different exceptions when:
+
+* a class cannot be found
+* an interface cannot be found
+* a trait cannot be found
+
+This makes it easier to understand runtime errors when looking at your app's logs.
+</div>
+
+## Public Interface
+
+`NoSuchTrait` has the following public interface:
+
+```php
+// NoSuchTrait lives in this namespace
+namespace GanbaroDigital\TypeChecking\V1\Exceptions;
+
+// our base class and interfaces
+use GanbaroDigital\ExceptionHelpers\V1\BaseExceptions\ParameterisedException;
+use GanbaroDigital\HttpStatus\Interfaces\HttpRuntimeErrorException;
+
+// return types from our method(s)
+use GanbaroDigital\HttpStatus\StatusValues\RuntimeError\UnexpectedErrorStatus;
+
+class NoSuchTrait
+  extends ParameterisedException
+  implements HttpRuntimeErrorException, TypeCheckingException
+{
+    // we map onto HTTP 500
+    use UnexpectedErrorStatusProvider;
+
+    /**
+     * create a new exception, from a PHP variable
+     *
+     * @param  mixed $traitName
+     *         the trait name that doesn't exist
+     * @param  string $fieldOrVarName
+     *         the name of the variable
+     * @param  array $callerFilter
+     *         a list of classes to filter from the backtrace
+     * @return NoSuchTrait
+     *         an exception ready for you to throw
+     */
+    public static function newFromInputParameter(
+        $traitName,
+        $fieldOrVarName = '$traitName',
+        array $callerFilter = []
+    );
+
+    /**
+     * create a new exception, from a PHP variable
+     *
+     * @param  mixed $traitName
+     *         the trait name that doesn't exist
+     * @param  string $fieldOrVarName
+     *         the name of the variable
+     * @param  array $callerFilter
+     *         a list of classes to filter from the backtrace
+     * @return NoSuchTrait
+     *         an exception ready for you to throw
+     */
+    public static function newFromVar(
+        $traitName,
+        $fieldOrVarName = '$traitName',
+        array $callerFilter = []
+    );
+
+    /**
+     * what was the data that we used to create the printable message?
+     *
+     * @return array
+     */
+    public function getMessageData();
+
+    /**
+     * what was the format string we used to create the printable message?
+     *
+     * @return string
+     */
+    public function getMessageFormat();
+
+    /**
+     * which HTTP status code do we map onto?
+     *
+     * @return UnexpectedErrorStatus
+     */
+    public function getHttpStatus();
+}
+
+```
+
+## How To Use
+
+### Creating Exceptions To Throw
+
+Call one of the factory methods to create a new throwable exception:
+
+```php
+// how to import
+use GanbaroDigital\TypeChecking\V1\Exceptions\NoSuchTrait;
+
+throw NoSuchTrait::newFromVar('UndefinedTrait');
+```
+
+`NoSuchTrait` provides different factory methods for different situations:
+
+Factory Method | When To Use
+---------------|------------
+`NoSuchTrait::newFromInputParameter()` | when `$traitName` was passed to your function or method as a parameter
+`NoSuchTrait::newFromVar()` | when `$traitName` is the return value from calling a function or method, or is a value created by your function or method
+
+### Catching The Exception
+
+`NoSuchTrait` extends or implements a rich set of classes and interfaces. You can use any of these to catch thrown exceptions.
+
+```php
+// example 1: we catch only NoSuchTrait exceptions
+use GanbaroDigital\TypeChecking\V1\Exceptions\NoSuchTrait;
+
+try {
+    throw NoSuchTrait::newFromVar('UndefinedTrait');
+}
+catch(NoSuchTrait $e) {
+    // ...
+}
+```
+
+```php
+// example 2: catch all exceptions thrown by the Type-Checking Library
+use GanbaroDigital\TypeChecking\V1\Exceptions\NoSuchTrait;
+use GanbaroDigital\TypeChecking\V1\Exceptions\TypeCheckingException;
+
+try {
+    throw NoSuchTrait::newFromVar('UndefinedTrait');
+}
+catch(TypeCheckingException $e) {
+    // ...
+}
+```
+
+```php
+// example 3: catch all exceptions where there was an unexpected problem
+use GanbaroDigital\TypeChecking\V1\Exceptions\NoSuchTrait;
+use GanbaroDigital\HttpStatus\Interfaces\HttpRuntimeErrorException;
+
+try {
+    throw NoSuchTrait::newFromVar('UndefinedTrait');
+}
+catch(HttpRequestErrorException $e) {
+    $httpStatus = $e->getHttpStatus();
+    // ...
+}
+```
+
+```php
+// example 4: catch all exceptions that map onto a HTTP status
+use GanbaroDigital\TypeChecking\V1\Exceptions\NoSuchTrait;
+use GanbaroDigital\HttpStatus\Interfaces\HttpException;
+
+try {
+    throw NoSuchTrait::newFromVar('UndefinedTrait');
+}
+catch(HttpException $e) {
+    $httpStatus = $e->getHttpStatus();
+    // ...
+}
+```
+
+```php
+// example 5: catch all runtime exceptions
+use GanbaroDigital\TypeChecking\V1\Exceptions\NoSuchTrait;
+use RuntimeException;
+
+try {
+    throw NoSuchTrait::newFromVar('UndefinedTrait');
+}
+catch(RuntimeException $e) {
+    // ...
+}
+```
+
+### Exception Data
+
+`NoSuchTrait` is a [`ParameterisedException`](http://ganbarodigital.github.io/php-mv-exception-helpers/V1/BaseExceptions/ParameterisedException.html). It contains extra data for you to write to your logs or inspect in your debugger of choice.
+
+```php
+try {
+    throw NoSuchTrait::newFromInputParameter('UndefinedTrait', '$traitName');
+}
+catch (NoSuchTrait $e) {
+    // extract the extra data
+    // getMessagedData() returns a PHP array
+    $exData = $e->getMessageData();
+}
+```
+
+Here's the full list of the extra data available in this exception.
+
+Parameter | Type | Description
+----------|------|------------
+`thrownBy` | [`CodeCaller`](http://ganbarodigital.github.io/php-mv-exception-helpers/V1/Callers/CodeCaller.html) | details of the function or method that is throwing the exception
+`thrownByName` | string | human-readable summary of `thrownBy`
+`calledBy` | [`CodeCaller`](http://ganbarodigital.github.io/php-mv-exception-helpers/V1/Callers/CodeCaller.html) | details of the function or method that has called the `thrownBy` function or method
+`calledByName` | string | human-readable summary of `calledBy`
+`fieldOrVarName` | string | the `$fieldOrVarName` passed into the factory method
+`traitName` | mixed | the `$traitName` passed into the factory method
+
+Here's a list of the extra data added by each factory method.
+
+Factory Method | Extra Data Added
+---------------|-----------------
+`NoSuchTrait::newFromInputParameter()` | `thrownBy`, `thrownByName`, `calledBy`, `calledByName`, `fieldOrVarName`, `traitName`
+`NoSuchTrait::newFromVar()` | `thrownBy`, `thrownByName`, `fieldOrVarName`, `traitName`
+
+## Class Contract
+
+Here is the contract for this class:
+
+    GanbaroDigital\Reflection\V1\Exceptions\NoSuchTrait
+     [x] Can instantiate
+     [x] is TypeCheckingException
+     [x] is RuntimeException
+     [x] is HttpException
+     [x] maps onto HTTP 500
+     [x] Can create from input parameter
+     [x] Can create from variable
+
+Class contracts are built from this class's unit tests.
+
+<div class="callout success">
+Future releases of this class will not break this contract.
+</div>
+
+<div class="callout info" markdown="1">
+Future releases of this class may add to this contract. New additions may include:
+
+* clarifying existing behaviour (e.g. stricter contract around input or return types)
+* add new behaviours (e.g. extra class methods)
+</div>
+
+<div class="callout warning" markdown="1">
+When you use this class, you can only rely on the behaviours documented by this contract.
+
+If you:
+
+* find other ways to use this class,
+* or depend on behaviours that are not covered by a unit test,
+* or depend on undocumented internal states of this class,
+
+... your code may not work in the future.
+</div>
+
+
+## Notes
+
+None at this time.
+
+## See Also
+
+* [`ParameterisedException` class](http://ganbarodigital.github.io/php-mv-exception-helpers/V1/BaseExceptions/ParameterisedException.html)
+* [mapping exceptions onto HTTP status codes](http://ganbarodigital.github.io/php-http-status/usage/http-exceptions.html)

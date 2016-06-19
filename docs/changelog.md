@@ -19,3 +19,4 @@ Ported type checks from the now deprecated `ganbarodigital/php-reflection` packa
 - Added `NoSuchClass` exception
 - Added `NoSuchClassOrInterface` exception
 - Added `NoSuchInterface` exception
+- Added `NoSuchTrait` exception
