@@ -170,14 +170,15 @@ class UnsupportedTypeTest extends PHPUnit_Framework_TestCase
         // ----------------------------------------------------------------
         // setup your test
 
-        $expectedMessage = 'ReflectionMethod->invokeArgs(): GanbaroDigitalTest\TypeChecking\V1\Exceptions\UnsupportedTypeTest->testCanCreateFromInputParameter()@186 says \'$item\' cannot be type \'string<Invoked>\'';
+        $expectedMessage = 'ReflectionMethod->invokeArgs(): GanbaroDigitalTest\TypeChecking\V1\Exceptions\UnsupportedTypeTest->testCanCreateFromInputParameter()@187 says \'$item\' cannot be type \'string<Invoked>\'';
         $expectedData = [
-            'thrownBy' => new CodeCaller(self::class, __FUNCTION__, '->', __FILE__, 186),
-            'thrownByName' => 'GanbaroDigitalTest\TypeChecking\V1\Exceptions\UnsupportedTypeTest->testCanCreateFromInputParameter()@186',
+            'thrownBy' => new CodeCaller(self::class, __FUNCTION__, '->', __FILE__, 187),
+            'thrownByName' => 'GanbaroDigitalTest\TypeChecking\V1\Exceptions\UnsupportedTypeTest->testCanCreateFromInputParameter()@187',
             'calledBy' => new CodeCaller('ReflectionMethod', 'invokeArgs', '->', null, null),
             'calledByName' => 'ReflectionMethod->invokeArgs()',
             'dataType' => 'string<Invoked>',
             'fieldOrVarName' => '$item',
+            'fieldOrVar' => 'Invoked',
         ];
 
         // ----------------------------------------------------------------
@@ -203,12 +204,13 @@ class UnsupportedTypeTest extends PHPUnit_Framework_TestCase
         // ----------------------------------------------------------------
         // setup your test
 
-        $expectedMessage = 'GanbaroDigitalTest\TypeChecking\V1\Exceptions\UnsupportedTypeTest->testCanCreateFromVariable()@217: \'$item\' cannot be type \'string<Invoked>\'';
+        $expectedMessage = 'GanbaroDigitalTest\TypeChecking\V1\Exceptions\UnsupportedTypeTest->testCanCreateFromVariable()@219: \'$item\' cannot be type \'string<Invoked>\'';
         $expectedData = [
-            'thrownBy' => new CodeCaller(self::class, __FUNCTION__, '->', __FILE__, 217),
-            'thrownByName' => 'GanbaroDigitalTest\TypeChecking\V1\Exceptions\UnsupportedTypeTest->testCanCreateFromVariable()@217',
+            'thrownBy' => new CodeCaller(self::class, __FUNCTION__, '->', __FILE__, 219),
+            'thrownByName' => 'GanbaroDigitalTest\TypeChecking\V1\Exceptions\UnsupportedTypeTest->testCanCreateFromVariable()@219',
             'dataType' => 'string<Invoked>',
             'fieldOrVarName' => '$item',
+            'fieldOrVar' => 'Invoked',
         ];
 
         // ----------------------------------------------------------------

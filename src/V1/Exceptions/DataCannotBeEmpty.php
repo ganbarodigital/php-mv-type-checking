@@ -44,10 +44,6 @@
 namespace GanbaroDigital\TypeChecking\V1\Exceptions;
 
 use GanbaroDigital\ExceptionHelpers\V1\BaseExceptions\ParameterisedException;
-use GanbaroDigital\ExceptionHelpers\V1\Callers\Filters\FilterCodeCaller;
-use GanbaroDigital\ExceptionHelpers\V1\Callers\Filters\FilterBacktraceForTwoCodeCallers;
-use GanbaroDigital\ExceptionHelpers\V1\ParameterBuilders\BuildThrownBy;
-use GanbaroDigital\ExceptionHelpers\V1\ParameterBuilders\BuildThrownAndCalledBy;
 use GanbaroDigital\HttpStatus\Interfaces\HttpRuntimeErrorException;
 use GanbaroDigital\HttpStatus\StatusProviders\RuntimeError\UnexpectedErrorStatusProvider;
 
@@ -55,62 +51,9 @@ class DataCannotBeEmpty
   extends ParameterisedException
   implements HttpRuntimeErrorException, TypeCheckingException
 {
-    const MSG_FORMAT = "'%fieldOrVarName\$s' cannot be empty";
-
     // we map onto HTTP 500
     use UnexpectedErrorStatusProvider;
 
-    /**
-     * create a new exception, from a PHP variable
-     *
-     * @param  mixed $fieldOrVar
-     *         the variable that cannot be empty
-     * @param  string $fieldOrVarName
-     *         the name of the variable
-     * @param  array $callerFilter
-     *         a list of classes to filter from the backtrace
-     * @return DataCannotBeEmpty
-     *         an exception ready for you to throw
-     */
-    public static function newFromInputParameter($fieldOrVar, $fieldOrVarName = '$fieldOrVar', array $callerFilter = [])
-    {
-        // who called us?
-        $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
-
-        // build the basic message and data
-        list($message, $data) = BuildThrownAndCalledBy::from(self::MSG_FORMAT, $backtrace);
-
-        // add in what's unique to us
-        $data['fieldOrVarName'] = $fieldOrVarName;
-
-        // all done
-        return new static($message, $data);
-    }
-
-    /**
-     * create a new exception, from a PHP variable
-     *
-     * @param  mixed $fieldOrVar
-     *         the variable that cannot be empty
-     * @param  string $fieldOrVarName
-     *         the name of the variable
-     * @param  array $callerFilter
-     *         a list of classes to filter from the backtrace
-     * @return DataCannotBeEmpty
-     *         an exception ready for you to throw
-     */
-    public static function newFromVar($fieldOrVar, $fieldOrVarName = '$fieldOrVarName', array $callerFilter = [])
-    {
-        // who called us?
-        $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
-
-        // build the basic message and data
-        list($message, $data) = BuildThrownBy::from(self::MSG_FORMAT, $backtrace);
-
-        // add in what's unique to us
-        $data['fieldOrVarName'] = $fieldOrVarName;
-
-        // all done
-        return new static($message, $data);
-    }
+    // our format string
+    static protected $defaultFormat = "'%fieldOrVarName\$s' cannot be empty";
 }

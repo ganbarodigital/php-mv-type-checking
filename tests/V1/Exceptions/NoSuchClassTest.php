@@ -170,20 +170,21 @@ class NoSuchClassTest extends PHPUnit_Framework_TestCase
         // ----------------------------------------------------------------
         // setup your test
 
-        $expectedMessage = 'ReflectionMethod->invokeArgs(): GanbaroDigitalTest\TypeChecking\V1\Exceptions\NoSuchClassTest->testCanCreateFromInputParameter()@186 says undefined class \'Invoked\'';
+        $expectedMessage = 'ReflectionMethod->invokeArgs(): GanbaroDigitalTest\TypeChecking\V1\Exceptions\NoSuchClassTest->testCanCreateFromInputParameter()@187 says undefined class \'Invoked\'';
         $expectedData = [
-            'thrownBy' => new CodeCaller(self::class, __FUNCTION__, '->', __FILE__, 186),
-            'thrownByName' => 'GanbaroDigitalTest\TypeChecking\V1\Exceptions\NoSuchClassTest->testCanCreateFromInputParameter()@186',
+            'thrownBy' => new CodeCaller(self::class, __FUNCTION__, '->', __FILE__, 187),
+            'thrownByName' => 'GanbaroDigitalTest\TypeChecking\V1\Exceptions\NoSuchClassTest->testCanCreateFromInputParameter()@187',
             'calledBy' => new CodeCaller('ReflectionMethod', 'invokeArgs', '->', null, null),
             'calledByName' => 'ReflectionMethod->invokeArgs()',
-            'className' => 'Invoked',
-            'fieldOrVarName' => '$className',
+            'fieldOrVar' => 'Invoked',
+            'fieldOrVarName' => '$item',
+            'dataType' => 'string<Invoked>',
         ];
 
         // ----------------------------------------------------------------
         // perform the change
 
-        $unit = NoSuchClass::newFromInputParameter('Invoked');
+        $unit = NoSuchClass::newFromInputParameter('Invoked', '$item');
 
         // ----------------------------------------------------------------
         // test the results
@@ -203,18 +204,19 @@ class NoSuchClassTest extends PHPUnit_Framework_TestCase
         // ----------------------------------------------------------------
         // setup your test
 
-        $expectedMessage = 'GanbaroDigitalTest\TypeChecking\V1\Exceptions\NoSuchClassTest->testCanCreateFromVariable()@217: undefined class \'Invoked\'';
+        $expectedMessage = 'GanbaroDigitalTest\TypeChecking\V1\Exceptions\NoSuchClassTest->testCanCreateFromVariable()@219: undefined class \'Invoked\'';
         $expectedData = [
-            'thrownBy' => new CodeCaller(self::class, __FUNCTION__, '->', __FILE__, 217),
-            'thrownByName' => 'GanbaroDigitalTest\TypeChecking\V1\Exceptions\NoSuchClassTest->testCanCreateFromVariable()@217',
-            'className' => 'Invoked',
+            'thrownBy' => new CodeCaller(self::class, __FUNCTION__, '->', __FILE__, 219),
+            'thrownByName' => 'GanbaroDigitalTest\TypeChecking\V1\Exceptions\NoSuchClassTest->testCanCreateFromVariable()@219',
+            'fieldOrVar' => 'Invoked',
             'fieldOrVarName' => '$className',
+            'dataType' => 'string<Invoked>',
         ];
 
         // ----------------------------------------------------------------
         // perform the change
 
-        $unit = NoSuchClass::newFromVar('Invoked');
+        $unit = NoSuchClass::newFromVar('Invoked', '$className');
 
         // ----------------------------------------------------------------
         // test the results

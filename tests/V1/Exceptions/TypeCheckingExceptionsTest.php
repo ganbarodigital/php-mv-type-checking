@@ -113,7 +113,7 @@ class TypeCheckingExceptionsTest extends PHPUnit_Framework_TestCase
         // perform the change
 
         $factory = $unit['DataCannotBeEmpty::newFromInputParameter'];
-        $exception = $factory(null);
+        $exception = $factory(null, '$data');
 
         // ----------------------------------------------------------------
         // test the results
@@ -135,7 +135,7 @@ class TypeCheckingExceptionsTest extends PHPUnit_Framework_TestCase
         // perform the change
 
         $factory = $unit['DataCannotBeEmpty::newFromVar'];
-        $exception = $factory(null);
+        $exception = $factory(null, '$data');
 
         // ----------------------------------------------------------------
         // test the results
@@ -157,7 +157,7 @@ class TypeCheckingExceptionsTest extends PHPUnit_Framework_TestCase
         // perform the change
 
         $factory = $unit['DataMustBeEmpty::newFromInputParameter'];
-        $exception = $factory("hello, world!");
+        $exception = $factory("hello, world!", '$data');
 
         // ----------------------------------------------------------------
         // test the results
@@ -179,7 +179,7 @@ class TypeCheckingExceptionsTest extends PHPUnit_Framework_TestCase
         // perform the change
 
         $factory = $unit['DataMustBeEmpty::newFromVar'];
-        $exception = $factory("hello, world!");
+        $exception = $factory("hello, world!", '$data');
 
         // ----------------------------------------------------------------
         // test the results
@@ -201,7 +201,7 @@ class TypeCheckingExceptionsTest extends PHPUnit_Framework_TestCase
         // perform the change
 
         $factory = $unit['InvalidPcreRegex::newFromInputParameter'];
-        $exception = $factory("/hello");
+        $exception = $factory("/hello", '$data');
 
         // ----------------------------------------------------------------
         // test the results
@@ -223,7 +223,7 @@ class TypeCheckingExceptionsTest extends PHPUnit_Framework_TestCase
         // perform the change
 
         $factory = $unit['InvalidPcreRegex::newFromVar'];
-        $exception = $factory("/hello");
+        $exception = $factory("/hello", '$data');
 
         // ----------------------------------------------------------------
         // test the results
@@ -245,7 +245,7 @@ class TypeCheckingExceptionsTest extends PHPUnit_Framework_TestCase
         // perform the change
 
         $factory = $unit['NoSuchClass::newFromInputParameter'];
-        $exception = $factory("UndefinedClass");
+        $exception = $factory("UndefinedClass", '$data');
 
         // ----------------------------------------------------------------
         // test the results
@@ -267,7 +267,7 @@ class TypeCheckingExceptionsTest extends PHPUnit_Framework_TestCase
         // perform the change
 
         $factory = $unit['NoSuchClass::newFromVar'];
-        $exception = $factory("UndefinedClass");
+        $exception = $factory("UndefinedClass", '$data');
 
         // ----------------------------------------------------------------
         // test the results
@@ -289,7 +289,7 @@ class TypeCheckingExceptionsTest extends PHPUnit_Framework_TestCase
         // perform the change
 
         $factory = $unit['NoSuchClassOrInterface::newFromInputParameter'];
-        $exception = $factory(null);
+        $exception = $factory(null, '$data');
 
         // ----------------------------------------------------------------
         // test the results
@@ -311,7 +311,7 @@ class TypeCheckingExceptionsTest extends PHPUnit_Framework_TestCase
         // perform the change
 
         $factory = $unit['NoSuchClassOrInterface::newFromVar'];
-        $exception = $factory("UndefinedClass");
+        $exception = $factory("UndefinedClass", '$data');
 
         // ----------------------------------------------------------------
         // test the results
@@ -333,7 +333,7 @@ class TypeCheckingExceptionsTest extends PHPUnit_Framework_TestCase
         // perform the change
 
         $factory = $unit['NoSuchInterface::newFromInputParameter'];
-        $exception = $factory("UndefinedInterface");
+        $exception = $factory("UndefinedInterface", '$data');
 
         // ----------------------------------------------------------------
         // test the results
@@ -355,7 +355,7 @@ class TypeCheckingExceptionsTest extends PHPUnit_Framework_TestCase
         // perform the change
 
         $factory = $unit['NoSuchInterface::newFromVar'];
-        $exception = $factory("UndefinedInterface");
+        $exception = $factory("UndefinedInterface", '$data');
 
         // ----------------------------------------------------------------
         // test the results
@@ -377,7 +377,7 @@ class TypeCheckingExceptionsTest extends PHPUnit_Framework_TestCase
         // perform the change
 
         $factory = $unit['NoSuchTrait::newFromInputParameter'];
-        $exception = $factory("UndefinedTrait");
+        $exception = $factory("UndefinedTrait", '$data');
 
         // ----------------------------------------------------------------
         // test the results
@@ -399,7 +399,7 @@ class TypeCheckingExceptionsTest extends PHPUnit_Framework_TestCase
         // perform the change
 
         $factory = $unit['NoSuchTrait::newFromVar'];
-        $exception = $factory("UndefinedTrait");
+        $exception = $factory("UndefinedTrait", '$data');
 
         // ----------------------------------------------------------------
         // test the results
@@ -421,7 +421,7 @@ class TypeCheckingExceptionsTest extends PHPUnit_Framework_TestCase
         // perform the change
 
         $factory = $unit['UnsupportedType::newFromInputParameter'];
-        $exception = $factory(null, '\$data');
+        $exception = $factory(null, '$data');
 
         // ----------------------------------------------------------------
         // test the results
@@ -443,7 +443,7 @@ class TypeCheckingExceptionsTest extends PHPUnit_Framework_TestCase
         // perform the change
 
         $factory = $unit['UnsupportedType::newFromVar'];
-        $exception = $factory(null, '\$data');
+        $exception = $factory(null, '$data');
 
         // ----------------------------------------------------------------
         // test the results
@@ -465,7 +465,7 @@ class TypeCheckingExceptionsTest extends PHPUnit_Framework_TestCase
         // perform the change
 
         $factory = $unit['UnsupportedValue::newFromInputParameter'];
-        $exception = $factory(null, '\$data');
+        $exception = $factory(null, '$data');
 
         // ----------------------------------------------------------------
         // test the results
@@ -487,7 +487,7 @@ class TypeCheckingExceptionsTest extends PHPUnit_Framework_TestCase
         // perform the change
 
         $factory = $unit['UnsupportedValue::newFromVar'];
-        $exception = $factory(null, '\$data');
+        $exception = $factory(null, '$data');
 
         // ----------------------------------------------------------------
         // test the results

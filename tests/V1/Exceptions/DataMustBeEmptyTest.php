@@ -170,14 +170,15 @@ class DataMustBeEmptyTest extends PHPUnit_Framework_TestCase
         // ----------------------------------------------------------------
         // setup your test
 
-        $expectedMessage = 'ReflectionMethod->invokeArgs(): GanbaroDigitalTest\TypeChecking\V1\Exceptions\DataMustBeEmptyTest->testCanCreateFromInputParameter()@187 says \'$data\' must be empty';
+        $expectedMessage = 'ReflectionMethod->invokeArgs(): GanbaroDigitalTest\TypeChecking\V1\Exceptions\DataMustBeEmptyTest->testCanCreateFromInputParameter()@188 says \'$data\' must be empty';
         $expectedData = [
-            'thrownBy' => new CodeCaller(self::class, __FUNCTION__, '->', __FILE__, __LINE__ + 12),
-            'thrownByName' => 'GanbaroDigitalTest\TypeChecking\V1\Exceptions\DataMustBeEmptyTest->testCanCreateFromInputParameter()@187',
+            'thrownBy' => new CodeCaller(self::class, __FUNCTION__, '->', __FILE__, __LINE__ + 13),
+            'thrownByName' => 'GanbaroDigitalTest\TypeChecking\V1\Exceptions\DataMustBeEmptyTest->testCanCreateFromInputParameter()@188',
             'calledBy' => new CodeCaller('ReflectionMethod', 'invokeArgs', '->', null, null),
             'calledByName' => 'ReflectionMethod->invokeArgs()',
             'fieldOrVarName' => '$data',
             'fieldOrVar' => null,
+            'dataType' => 'NULL',
         ];
         $data = null;
 
@@ -204,12 +205,13 @@ class DataMustBeEmptyTest extends PHPUnit_Framework_TestCase
         // ----------------------------------------------------------------
         // setup your test
 
-        $expectedMessage = 'GanbaroDigitalTest\TypeChecking\V1\Exceptions\DataMustBeEmptyTest->testCanCreateFromVariable()@219: \'$data\' must be empty';
+        $expectedMessage = 'GanbaroDigitalTest\TypeChecking\V1\Exceptions\DataMustBeEmptyTest->testCanCreateFromVariable()@221: \'$data\' must be empty';
         $expectedData = [
-            'thrownBy' => new CodeCaller(self::class, __FUNCTION__, '->', __FILE__, __LINE__ + 10),
-            'thrownByName' => 'GanbaroDigitalTest\TypeChecking\V1\Exceptions\DataMustBeEmptyTest->testCanCreateFromVariable()@219',
+            'thrownBy' => new CodeCaller(self::class, __FUNCTION__, '->', __FILE__, __LINE__ + 11),
+            'thrownByName' => 'GanbaroDigitalTest\TypeChecking\V1\Exceptions\DataMustBeEmptyTest->testCanCreateFromVariable()@221',
             'fieldOrVarName' => '$data',
             'fieldOrVar' => null,
+            'dataType' => 'NULL'
         ];
         $data = null;
 

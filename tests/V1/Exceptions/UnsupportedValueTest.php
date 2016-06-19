@@ -178,7 +178,7 @@ class UnsupportedValueTest extends PHPUnit_Framework_TestCase
             'calledByName' => 'ReflectionMethod->invokeArgs()',
             'dataType' => 'string<hello, world!>',
             'fieldOrVarName' => '$item',
-            'var' => 'hello, world!',
+            'fieldOrVar' => 'hello, world!',
         ];
 
         // ----------------------------------------------------------------
@@ -210,7 +210,7 @@ class UnsupportedValueTest extends PHPUnit_Framework_TestCase
             'thrownByName' => 'GanbaroDigitalTest\TypeChecking\V1\Exceptions\UnsupportedValueTest->testCanCreateFromVariable()@219',
             'dataType' => 'string<hello, world!>',
             'fieldOrVarName' => '$item',
-            'var' => 'hello, world!',
+            'fieldOrVar' => 'hello, world!',
         ];
 
         // ----------------------------------------------------------------

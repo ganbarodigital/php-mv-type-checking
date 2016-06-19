@@ -170,20 +170,21 @@ class NoSuchInterfaceTest extends PHPUnit_Framework_TestCase
         // ----------------------------------------------------------------
         // setup your test
 
-        $expectedMessage = 'ReflectionMethod->invokeArgs(): GanbaroDigitalTest\TypeChecking\V1\Exceptions\NoSuchInterfaceTest->testCanCreateFromInputParameter()@186 says undefined interface \'Invoked\'';
+        $expectedMessage = 'ReflectionMethod->invokeArgs(): GanbaroDigitalTest\TypeChecking\V1\Exceptions\NoSuchInterfaceTest->testCanCreateFromInputParameter()@187 says undefined interface \'Invoked\'';
         $expectedData = [
-            'thrownBy' => new CodeCaller(self::class, __FUNCTION__, '->', __FILE__, 186),
-            'thrownByName' => 'GanbaroDigitalTest\TypeChecking\V1\Exceptions\NoSuchInterfaceTest->testCanCreateFromInputParameter()@186',
+            'thrownBy' => new CodeCaller(self::class, __FUNCTION__, '->', __FILE__, 187),
+            'thrownByName' => 'GanbaroDigitalTest\TypeChecking\V1\Exceptions\NoSuchInterfaceTest->testCanCreateFromInputParameter()@187',
             'calledBy' => new CodeCaller('ReflectionMethod', 'invokeArgs', '->', null, null),
             'calledByName' => 'ReflectionMethod->invokeArgs()',
-            'interfaceName' => 'Invoked',
-            'fieldOrVarName' => '$interfaceName',
+            'fieldOrVar' => 'Invoked',
+            'fieldOrVarName' => '$item',
+            'dataType' => 'string<Invoked>',
         ];
 
         // ----------------------------------------------------------------
         // perform the change
 
-        $unit = NoSuchInterface::newFromInputParameter('Invoked');
+        $unit = NoSuchInterface::newFromInputParameter('Invoked', '$item');
 
         // ----------------------------------------------------------------
         // test the results
@@ -203,18 +204,19 @@ class NoSuchInterfaceTest extends PHPUnit_Framework_TestCase
         // ----------------------------------------------------------------
         // setup your test
 
-        $expectedMessage = 'GanbaroDigitalTest\TypeChecking\V1\Exceptions\NoSuchInterfaceTest->testCanCreateFromVariable()@217: undefined interface \'Invoked\'';
+        $expectedMessage = 'GanbaroDigitalTest\TypeChecking\V1\Exceptions\NoSuchInterfaceTest->testCanCreateFromVariable()@219: undefined interface \'Invoked\'';
         $expectedData = [
-            'thrownBy' => new CodeCaller(self::class, __FUNCTION__, '->', __FILE__, 217),
-            'thrownByName' => 'GanbaroDigitalTest\TypeChecking\V1\Exceptions\NoSuchInterfaceTest->testCanCreateFromVariable()@217',
-            'interfaceName' => 'Invoked',
+            'thrownBy' => new CodeCaller(self::class, __FUNCTION__, '->', __FILE__, 219),
+            'thrownByName' => 'GanbaroDigitalTest\TypeChecking\V1\Exceptions\NoSuchInterfaceTest->testCanCreateFromVariable()@219',
+            'fieldOrVar' => 'Invoked',
             'fieldOrVarName' => '$interfaceName',
+            'dataType' => 'string<Invoked>',
         ];
 
         // ----------------------------------------------------------------
         // perform the change
 
-        $unit = NoSuchInterface::newFromVar('Invoked');
+        $unit = NoSuchInterface::newFromVar('Invoked', '$interfaceName');
 
         // ----------------------------------------------------------------
         // test the results

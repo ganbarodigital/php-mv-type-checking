@@ -13,7 +13,7 @@
     ],
     "require": {
         "php": ">= 5.5",
-        "ganbarodigital/php-mv-exception-helpers": "^v1.2016061401",
+        "ganbarodigital/php-mv-exception-helpers": "^v1.2016061902",
         "ganbarodigital/php-mv-defensive": "^1.0",
         "ganbarodigital/php-the-missing-bits": "^1.6",
         "ganbarodigital/php-mv-polymorphism": "^1.2016060501",

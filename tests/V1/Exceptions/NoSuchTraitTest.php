@@ -170,20 +170,21 @@ class NoSuchTraitTest extends PHPUnit_Framework_TestCase
         // ----------------------------------------------------------------
         // setup your test
 
-        $expectedMessage = 'ReflectionMethod->invokeArgs(): GanbaroDigitalTest\TypeChecking\V1\Exceptions\NoSuchTraitTest->testCanCreateFromInputParameter()@186 says undefined trait \'Invoked\'';
+        $expectedMessage = 'ReflectionMethod->invokeArgs(): GanbaroDigitalTest\TypeChecking\V1\Exceptions\NoSuchTraitTest->testCanCreateFromInputParameter()@187 says undefined trait \'Invoked\'';
         $expectedData = [
-            'thrownBy' => new CodeCaller(self::class, __FUNCTION__, '->', __FILE__, 186),
-            'thrownByName' => 'GanbaroDigitalTest\TypeChecking\V1\Exceptions\NoSuchTraitTest->testCanCreateFromInputParameter()@186',
+            'thrownBy' => new CodeCaller(self::class, __FUNCTION__, '->', __FILE__, 187),
+            'thrownByName' => 'GanbaroDigitalTest\TypeChecking\V1\Exceptions\NoSuchTraitTest->testCanCreateFromInputParameter()@187',
             'calledBy' => new CodeCaller('ReflectionMethod', 'invokeArgs', '->', null, null),
             'calledByName' => 'ReflectionMethod->invokeArgs()',
-            'traitName' => 'Invoked',
-            'fieldOrVarName' => '$traitName',
+            'fieldOrVar' => 'Invoked',
+            'fieldOrVarName' => '$item',
+            'dataType' => 'string<Invoked>',
         ];
 
         // ----------------------------------------------------------------
         // perform the change
 
-        $unit = NoSuchTrait::newFromInputParameter('Invoked');
+        $unit = NoSuchTrait::newFromInputParameter('Invoked', '$item');
 
         // ----------------------------------------------------------------
         // test the results
@@ -203,18 +204,19 @@ class NoSuchTraitTest extends PHPUnit_Framework_TestCase
         // ----------------------------------------------------------------
         // setup your test
 
-        $expectedMessage = 'GanbaroDigitalTest\TypeChecking\V1\Exceptions\NoSuchTraitTest->testCanCreateFromVariable()@217: undefined trait \'Invoked\'';
+        $expectedMessage = 'GanbaroDigitalTest\TypeChecking\V1\Exceptions\NoSuchTraitTest->testCanCreateFromVariable()@219: undefined trait \'Invoked\'';
         $expectedData = [
-            'thrownBy' => new CodeCaller(self::class, __FUNCTION__, '->', __FILE__, 217),
-            'thrownByName' => 'GanbaroDigitalTest\TypeChecking\V1\Exceptions\NoSuchTraitTest->testCanCreateFromVariable()@217',
-            'traitName' => 'Invoked',
+            'thrownBy' => new CodeCaller(self::class, __FUNCTION__, '->', __FILE__, 219),
+            'thrownByName' => 'GanbaroDigitalTest\TypeChecking\V1\Exceptions\NoSuchTraitTest->testCanCreateFromVariable()@219',
+            'fieldOrVar' => 'Invoked',
             'fieldOrVarName' => '$traitName',
+            'dataType' => 'string<Invoked>',
         ];
 
         // ----------------------------------------------------------------
         // perform the change
 
-        $unit = NoSuchTrait::newFromVar('Invoked');
+        $unit = NoSuchTrait::newFromVar('Invoked', '$traitName');
 
         // ----------------------------------------------------------------
         // test the results
